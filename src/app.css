@@ -1,0 +1,197 @@
+/* DJ AnnieMatrix Portfolio - Global Styles */
+/* CRT Monitor Aesthetic */
+
+:root {
+  --codec-green: #00FF41;
+  --codec-green-dim: #00cc33;
+  --codec-green-glow: rgba(0, 255, 65, 0.4);
+  --alert-red: #ff3333;
+  --bg-black: #0a0a0a;
+  --bg-darker: #050505;
+  --scan-line-opacity: 0.08;
+  --phosphor-blur: 2px;
+  --crt-curve: 3px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Share Tech Mono', monospace;
+  background: var(--bg-black);
+  color: var(--codec-green);
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* CRT Screen Container */
+#app {
+  position: relative;
+  min-height: 100vh;
+  background: 
+    radial-gradient(ellipse at center, var(--bg-black) 0%, var(--bg-darker) 100%);
+}
+
+/* CRT Scan Lines Overlay */
+#app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* CRT Vignette Effect */
+#app::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9997;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow: 
+    0 0 10px var(--codec-green-glow),
+    0 0 20px var(--codec-green-glow),
+    0 0 40px rgba(0, 255, 65, 0.2);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+}
+
+p {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+a {
+  color: var(--codec-green);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  text-shadow: 0 0 15px var(--codec-green-glow);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--codec-green-dim);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--codec-green);
+}
+
+/* Selection */
+::selection {
+  background: var(--codec-green);
+  color: var(--bg-black);
+}
+
+/* Global Animations */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  97% { opacity: 0.9; }
+  98% { opacity: 1; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, 2px); }
+  80% { transform: translate(1px, -2px); }
+}
+
+@keyframes phosphor-glow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 10px var(--codec-green-glow),
+      0 0 20px var(--codec-green-glow);
+  }
+  50% { 
+    text-shadow: 
+      0 0 15px var(--codec-green-glow),
+      0 0 30px var(--codec-green-glow),
+      0 0 45px rgba(0, 255, 65, 0.15);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Utility Classes */
+.codec-green { color: var(--codec-green); }
+.alert-red { color: var(--alert-red); }
+
+.glow-text {
+  animation: phosphor-glow 3s ease-in-out infinite;
+}
+
+.flicker {
+  animation: flicker 8s infinite;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --scan-line-opacity: 0.05;
+  }
+}
