@@ -305,6 +305,8 @@
 
     .scroll-indicator {
         position: absolute;
+
+        z-index: -9;
         bottom: 4rem;
         left: 50%;
         transform: translateX(-50%);
@@ -355,6 +357,23 @@
     @media (max-width: 480px) {
         .hero-title {
             font-size: 2rem;
+        }
+    }
+
+    #hero {
+        padding: 16px;
+    }
+    .hero-content {
+        transform: scale(0.7);
+    }
+
+    /* For Screen height < 640px */
+    @media (min-height: 800px) {
+        #hero {
+            padding: 48px;
+        }
+        .hero-content {
+            transform: scale(1);
         }
     }
 </style>
